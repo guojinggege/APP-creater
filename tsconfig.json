@@ -48,5 +48,6 @@
     {
       "path": "./tsconfig.app.json"
     }
-  ]
+  ],
+  "extends": "expo/tsconfig.base"
 }

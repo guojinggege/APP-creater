@@ -1,8 +1,7 @@
 import React from 'react';
 import { AlertNotificationRoot } from 'react-native-alert-notification';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
-import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
+import { StatusBar } from 'react-native';
 import RootLayout from './src/app/_layout';
 
 const queryClient = new QueryClient({
