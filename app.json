@@ -1,0 +1,59 @@
+{
+  "expo": {
+    "name": "AI Creator Platform",
+    "slug": "ai-creator-platform",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTabletMode": false,
+      "bundleIdentifier": "com.aicreator.platform",
+      "buildNumber": "1",
+      "infoPlist": {
+        "UIRequiredDeviceCapabilities": [
+          "portrait",
+          "portrait-upside-down"
+        ]
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.aicreator.platform"
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Poppins-Regular.ttf",
+            "./assets/fonts/Poppins-Bold.ttf"
+          ]
+        }
+      ],
+      [
+        "expo-status-bar",
+        {
+          "backgroundColor": "#000000"
+        }
+      ]
+    ],
+    "scheme": "aicreator"
+  }
+}
