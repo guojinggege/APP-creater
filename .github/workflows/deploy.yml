@@ -1,4 +1,4 @@
-name: Deploy to Web
+name: Deploy to GitHub Pages
 
 on:
   push:
@@ -6,8 +6,20 @@ on:
   pull_request:
     branches: [ main ]
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
 
     strategy:
@@ -15,13 +27,16 @@ jobs:
         node-version: [18.x]
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
     
     - name: Install dependencies
       run: npm install --legacy-peer-deps
@@ -29,11 +44,11 @@ jobs:
     - name: Build web
       run: npm run build:web
     
-    - name: Deploy to Vercel
-      uses: amondnet/vercel-action@v20
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        working-directory: ./dist
+        path: './dist'
+    
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
